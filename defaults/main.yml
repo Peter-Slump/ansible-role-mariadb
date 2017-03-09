@@ -1,0 +1,14 @@
+---
+
+mariadb_users: []
+
+# Example: all privilages get granted
+# mariadb_users:
+#   - name: "username"
+#     password: "password"
+#     database: "database_name"
+
+mariadb_databases: []
+
+# mariadb_databases:
+#   - "database_name"

@@ -1,0 +1,12 @@
+---
+
+- name: install | Install required packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - 'mariadb-server'
+    - 'python-mysqldb'
+  tags:
+    - mariadb
+    - install

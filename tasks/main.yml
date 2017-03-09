@@ -1,11 +1,4 @@
 ---
 
-- name: Install MariaDB
-  apt:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-    - 'mariadb-server'
-    - 'python-mysqldb'
-
-- include: monit.yml
+include: install.yml
+include: setup.yml

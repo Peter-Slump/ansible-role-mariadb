@@ -1,0 +1,23 @@
+---
+
+- name: setup | Create databases
+  mysql_db:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ mariadb_databases }}"
+  tags:
+    - mariadb
+    - setup
+
+- name: setup | Database users
+  mysql_user:
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    priv: '{{ item.database }}.*:ALL'
+    state: present
+  with_items:
+    - "{{ mariadb_users }}"
+  tags:
+    - mariadb
+    - setup

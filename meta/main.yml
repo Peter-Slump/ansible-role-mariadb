@@ -1,9 +1,3 @@
 ---
 
 dependencies:
-  - src: https://github.com/Peter-Slump/ansible-role-monit.git
-    version: v0.0.1
-    scm: git
-    name: monit
-
-  - role: monit
