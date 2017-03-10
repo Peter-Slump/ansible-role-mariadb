@@ -1,4 +1,4 @@
 ---
 
-include: install.yml
-include: setup.yml
+- include: install.yml
+- include: setup.yml
