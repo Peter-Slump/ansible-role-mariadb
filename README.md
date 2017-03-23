@@ -1,6 +1,6 @@
 # Ansible role MariaDB
 
-Version: 0.0.3
+Version: 0.1.0
 
 Supported OS: Ubuntu
 
