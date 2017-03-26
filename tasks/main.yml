@@ -2,3 +2,9 @@
 
 - include: install.yml
 - include: setup.yml
+- include: backup.yml
+  with_items: "{{ mariadb_users }}"
+  when: mariadb_enable_backup
+  tags:
+    - mariadb
+    - backup

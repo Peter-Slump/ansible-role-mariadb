@@ -12,3 +12,6 @@ mariadb_databases: []
 
 # mariadb_databases:
 #   - "database_name"
+
+mariadb_backup_folder: /var/backup/mariadb
+mariadb_enable_backup: True

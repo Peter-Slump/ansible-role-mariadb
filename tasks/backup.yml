@@ -1,0 +1,35 @@
+---
+
+- name: backup | Create backup folder
+  file:
+    path: "{{ mariadb_backup_folder }}"
+    state: directory
+    owner: mysql
+    group: mysql
+    mode: 0755
+    recurse: True
+  tags:
+    - mariadb
+    - backup
+
+- name: backup | Setup cron for recurring backup
+  cron:
+    name: 'MariaDB backup'
+    hour: 3
+    user: mysql
+    job: '/usr/bin/mysqldump -u "{{ item.name }}" -p"{{ item.password }}" {{ item.database }} | gzip > {{ mariadb_backup_folder }}/{{ item.database }}_$( date +"%Y_%m_%d" ).sql.gz'
+    cron_file: 'mariadb_backup_{{ item.database }}'
+  tags:
+    - mariadb
+    - backup
+
+- name: backup | Setup cron to delete backups older than a week
+  cron:
+    name: 'MariaDB backup cleanup'
+    hour: 2
+    user: mysql
+    job: 'find {{ mariadb_backup_folder }} -mtime +7 -type f -delete'
+    cron_file: 'mariadb_backup_cleanup'
+  tags:
+    - mariadb
+    - backup
