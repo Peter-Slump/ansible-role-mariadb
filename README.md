@@ -6,11 +6,23 @@ Supported OS: Ubuntu
 
 Ansible role for MariaDB.
 
-- Configures monitoring using Monit.
-
 ## Role variables
 
--
+```
+# Example: all privilages get granted
+# mariadb_users:
+#   - name: "username"
+#     password: "password"
+#     database: "database_name"
+mariadb_users: []
+
+# mariadb_databases:
+#   - "database_name"
+mariadb_databases: []
+
+mariadb_backup_folder: /var/backup/mariadb
+mariadb_enable_backup: True
+```
 
 ## example
 
@@ -18,4 +30,10 @@ Ansible role for MariaDB.
 - hosts: all
   roles:
     - role: mariadb
+      mariadb_databases:
+        - my_db
+      mariadb_users:
+        - name: user
+          password: MyVerySecretPassword
+          database: my_db
 ```
