@@ -16,8 +16,9 @@
   cron:
     name: 'MariaDB backup'
     hour: 3
+    minute: 0
     user: mysql
-    job: '/usr/bin/mysqldump -u "{{ item.name }}" -p"{{ item.password }}" {{ item.database }} | gzip > {{ mariadb_backup_folder }}/{{ item.database }}_$( date +"%Y_%m_%d" ).sql.gz'
+    job: '/usr/bin/mysqldump -u "{{ item.name }}" -p"{{ item.password }}" {{ item.database }} | gzip > {{ mariadb_backup_folder }}/{{ item.database }}_$( date +"\%Y_\%m_\%d" ).sql.gz'
     cron_file: 'mariadb_backup_{{ item.database }}'
   tags:
     - mariadb
@@ -27,6 +28,7 @@
   cron:
     name: 'MariaDB backup cleanup'
     hour: 2
+    minute: 0
     user: mysql
     job: 'find {{ mariadb_backup_folder }} -mtime +7 -type f -delete'
     cron_file: 'mariadb_backup_cleanup'
